@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!--    指定配置文件-->
+    <properties resource="jdbc.properties"/>
+
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    
+<!--    定义别名-->
+    <typeAliases>
+        <package name="shy.StudentDao"/>
+    </typeAliases>
+    
+<!--    配置插件-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
+
+    <environments default="mydev">
+        <environment id="mydev">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.user}"/>
+                <property name="password" value="${jdbc.passwd}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+<!--映射文件-->
+    <mappers>
+<!--        第一种方式 指定mapper文件-->
+<!--        <mapper resource="shy/studentDao.xml"/>-->
+        
+<!--        第二种，使用包名-->
+<!--        所有都会映射-->
+<!--        条件1，mapper文件名称需要和接口名称一样，区分大小写
+                2，mapper文件和dao接口需要在同一目录
+-->
+        <package name="shy"/>
+    </mappers>
+</configuration>

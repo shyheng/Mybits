@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--指定约束文件，限制和检查mybatis的要求 -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--当前文件的根标签，
+namespace，命名空间 可以自定义，但是要全限定名称-->
+<mapper namespace="shy.studentDao">
+
+
+<!--    select标签中的id用来让mybatis用id来执行mysql语句，可以自定义但是
+要和接口中的方法名一模一样 ，         代表SQL语句
+resultType 表示结果类型的，SQL语句执行后，遍历得到java对象
+得写  全限定名称                    给Student中的类型赋值  -->
+    <select id="selectStudent" resultType="shy.Student">
+        select id,name,email,age from student order by id
+    </select>
+
+<!--    插入操作-->
+    <insert id="insertStudent">
+        insert into student values(#{id},#{name},#{email},#{age})
+    </insert>
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--mybatis的配置文件
+约束文件<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+-->
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+<!--    坏境配置：数据库连接信息
+        default必须和id一样，告诉mybatis访问那个数据库
+-->
+    <environments default="mydev">
+<!--       environment ：数据库的 配置信息，坏境 id 一个唯一值，表示坏境的名称  -->
+        <environment id="mydev">
+<!--           transactionManager mybatis的事务类型 -->
+            <transactionManager type="JDBC"/>
+<!--           dataSource，表示数据源，连接数据库  POOLED表示使用连接池 -->
+            <dataSource type="POOLED">
+<!--            driver  驱动    -->
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/shy1?useUnicode=true&amp;characterEncoding=utf8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="3333"/>
+            </dataSource>
+        </environment>
+
+<!--        线上数据库，真实使用的库-->
+        <environment id="online">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/shy1"/>
+                <property name="username" value="root"/>
+                <property name="password" value="3333"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+<!--    SQL 映射文件的位置
+从类路径开始
+  target/classes(类路径)
+-->
+    <mappers>
+        <mapper resource="shy/studentDao.xml"/>
+    </mappers>
+</configuration>
